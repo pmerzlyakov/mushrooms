@@ -2,14 +2,14 @@
     "name": "PlayerControls",
     "maps": [
         {
-            "name": "PlayerControls",
+            "name": "GameControls",
             "id": "cdd0586e-d5f1-4917-886b-334de81be12a",
             "actions": [
                 {
                     "name": "Movement",
                     "type": "Value",
                     "id": "f45c6d3d-0982-4011-a1e3-968d9d9b75ea",
-                    "expectedControlType": "Stick",
+                    "expectedControlType": "Vector2",
                     "processors": "",
                     "interactions": ""
                 }
