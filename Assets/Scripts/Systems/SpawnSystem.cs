@@ -8,14 +8,12 @@ namespace Mushrooms
 {
     public class SpawnSystem : IEcsRunSystem
     {
-        // private EcsFilter<HitComponent> shoots;
-        // private EcsFilter<PlayerComponent> playerFilter;
+        // int entity = world.NewEntity ();
 
-        // public void Run () {
-        //     // Will be called on each EcsSystems.Run() call.
-        // }
+        // private EcsFilter<MushroomComponent> murshrooms;
 
-        // void IEcsRunSystem.Run()
+        public void Run(EcsSystems systems)
+        {
         // {
         //           // test creating and removing entites in loop.
         //     var entity = _world.CreateEntity ();
@@ -60,10 +58,6 @@ namespace Mushrooms
         //         }
                 
         //     }
-        // }
-        public void Run(EcsSystems systems)
-        {
-            throw new NotImplementedException();
         }
     }
 }

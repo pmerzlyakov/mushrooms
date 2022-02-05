@@ -1,11 +1,8 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
 namespace Mushrooms
 {
     public struct CapacityComponent
     {
-        public GameObject murshroom;
+        public int DefaultCapacity;
+        public int MaxCapacity;
     }
 }
