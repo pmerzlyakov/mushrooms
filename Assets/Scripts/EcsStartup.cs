@@ -8,19 +8,21 @@ namespace Mushrooms
         private EcsWorld _world;
         private EcsSystems _updateSystems;
         private EcsSystems _fixedUpdateSystems;
+        [SerializeField] 
+        private SceneData _sharedData;
 
         private void Start()
         {
             _world = new EcsWorld();
-
+            
             _updateSystems = new EcsSystems(_world);
             // _updateSystems.Add(new System1());
-            // _updateSystems.OneFrame<Component1>();
             _updateSystems.Init();
-
-            _fixedUpdateSystems = new EcsSystems(_world);
-            // _fixedUpdateSystems.Add(new System1());
-            // _fixedUpdateSystems.OneFrame<Component1>();
+            
+        
+            _fixedUpdateSystems = new EcsSystems(_world, _sharedData);
+            _fixedUpdateSystems.Add(new SpawnSystem());
+           
             _fixedUpdateSystems.Init();
         }
 

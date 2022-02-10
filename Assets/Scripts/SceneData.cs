@@ -1,11 +1,11 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
+using System.Collections;
 
 namespace Mushrooms
 {
-    public class SceneData
+    public class SceneData : MonoBehaviour
     {  
-        public Transform House = null;
-        public Transform Mushrooms = null;
+        public Transform Mushroom = null;
     }
 }
