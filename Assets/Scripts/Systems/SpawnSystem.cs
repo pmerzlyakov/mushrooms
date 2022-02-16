@@ -3,6 +3,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Mushrooms.Extensions.EntityToGameObject;
 
 namespace Mushrooms
 {
@@ -34,14 +35,13 @@ namespace Mushrooms
             EcsPool<MovementComponent> movement = world.GetPool<MovementComponent>(); 
             EcsPool<ArmorComponent> armor = world.GetPool<ArmorComponent>(); 
 
-            ref var a = ref render.Add(entity);
-            a.Transform = mushroomTransform;
             health.Add(entity);
             damage.Add(entity);
             movement.Add(entity);
             armor.Add(entity);
 
-            GameObject.Instantiate(a.Transform, position, Quaternion.identity);
+            var mushroomGO = GameObject.Instantiate(mushroomTransform, position, Quaternion.identity);
+            mushroomGO.transform.GetProvider().SetEntity(entity);
         }
     }
 }
