@@ -16,10 +16,8 @@ namespace Mushrooms
             _world = new EcsWorld();
             
             _updateSystems = new EcsSystems(_world);
-            // _updateSystems.Add(new System1());
             _updateSystems.Init();
             
-        
             _fixedUpdateSystems = new EcsSystems(_world, _sharedData);
             _fixedUpdateSystems.Add(new SpawnSystem());
            
