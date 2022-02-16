@@ -403,10 +403,15 @@ PrefabInstance:
       propertyPath: m_Name
       value: House (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 15767813810813005, guid: 9707f20aed11042a3a126513407d83fb,
+        type: 3}
+      propertyPath: m_TagString
+      value: House
+      objectReference: {fileID: 0}
     - target: {fileID: 15767813810813009, guid: 9707f20aed11042a3a126513407d83fb,
         type: 3}
       propertyPath: m_RootOrder
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 15767813810813009, guid: 9707f20aed11042a3a126513407d83fb,
         type: 3}
@@ -470,6 +475,11 @@ PrefabInstance:
     - target: {fileID: 15767813810813005, guid: 9707f20aed11042a3a126513407d83fb,
         type: 3}
       propertyPath: m_Name
+      value: House
+      objectReference: {fileID: 0}
+    - target: {fileID: 15767813810813005, guid: 9707f20aed11042a3a126513407d83fb,
+        type: 3}
+      propertyPath: m_TagString
       value: House
       objectReference: {fileID: 0}
     - target: {fileID: 15767813810813009, guid: 9707f20aed11042a3a126513407d83fb,

@@ -2,21 +2,30 @@ using Leopotam.EcsLite;
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
 using Mushrooms.Extensions.EntityToGameObject;
+using UnityEngine;
 
 namespace Mushrooms
 {
-    public class SpawnSystem : IEcsInitSystem
+    public class SpawnSystem : IEcsRunSystem
     {
         EcsWorld world = null;
-        public void Init(EcsSystems systems)
+
+        float defaultSpawnTimeout = 3;
+        float currentSpawnTimeout = 2;
+
+        public void Run(EcsSystems systems)
         {
             var sceneData = systems.GetShared<SceneData>();
 
             world = systems.GetWorld();
-            InitMushroom(sceneData.Mushroom, new Vector3(2.0F, 2.0F, 2.0F));
-            InitMushroom(sceneData.Mushroom, new Vector3(5.0F, 2.0F, 2.0F));
+            if(currentSpawnTimeout > 0)
+            {
+                currentSpawnTimeout -= Time.deltaTime;
+                return;
+            }
+            InitMushroom(sceneData.Mushroom, new Vector3(5.0F, 1.0F, 2.0F));
+            currentSpawnTimeout = defaultSpawnTimeout;
         }
 
 
@@ -27,7 +36,7 @@ namespace Mushrooms
                 Debug.Log("mushroomTransform == null");
                 return;
             }
-            int entity = world.NewEntity();
+            int mushroomEntity = world.NewEntity();
             
             EcsPool<RenderComponent> render = world.GetPool<RenderComponent>(); 
             EcsPool<HealthComponent> health = world.GetPool<HealthComponent>(); 
@@ -35,13 +44,13 @@ namespace Mushrooms
             EcsPool<MovementComponent> movement = world.GetPool<MovementComponent>(); 
             EcsPool<ArmorComponent> armor = world.GetPool<ArmorComponent>(); 
 
-            health.Add(entity);
-            damage.Add(entity);
-            movement.Add(entity);
-            armor.Add(entity);
+            health.Add(mushroomEntity);
+            damage.Add(mushroomEntity);
+            movement.Add(mushroomEntity);
+            armor.Add(mushroomEntity);
 
-            var mushroomGO = GameObject.Instantiate(mushroomTransform, position, Quaternion.identity);
-            mushroomGO.transform.GetProvider().SetEntity(entity);
+            var mushroomGO = GameObject.Instantiate(mushroomTransform, mushroomTransform.position, Quaternion.identity);
+            mushroomGO.transform.GetProvider().SetEntity(mushroomEntity);
         }
     }
 }
