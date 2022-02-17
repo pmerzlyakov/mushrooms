@@ -45,12 +45,14 @@ namespace Mushrooms
             EcsPool<CapacityComponent> capacity = world.GetPool<CapacityComponent>(); 
             EcsPool<ArmorComponent> armor = world.GetPool<ArmorComponent>(); 
 
-            render.Add(houseEntity);
             health.Add(houseEntity);
             damage.Add(houseEntity);
             capacity.Add(houseEntity);
             level.Add(houseEntity);
             armor.Add(houseEntity);
+
+            ref RenderComponent houseRender = ref render.Add(houseEntity);
+            houseRender.Transform = house.transform;
 
             house.transform.GetProvider().SetEntity(houseEntity);
         }

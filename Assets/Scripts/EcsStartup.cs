@@ -19,8 +19,8 @@ namespace Mushrooms
             _updateSystems.Init();
             
             _fixedUpdateSystems = new EcsSystems(_world, _sharedData);
-            _fixedUpdateSystems.Add(new SpawnSystem());
             _fixedUpdateSystems.Add(new HouseInitSystem());
+            _fixedUpdateSystems.Add(new SpawnSystem());
            
             _fixedUpdateSystems.Init();
         }
