@@ -1,8 +1,10 @@
+using UnityEngine;
+
 namespace Mushrooms
 {
     public struct MovementComponent
     {
         public float Speed;
-        public float Direction;
+        public Vector3 Target;
     }
 }

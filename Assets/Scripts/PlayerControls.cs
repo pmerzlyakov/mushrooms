@@ -18,12 +18,20 @@ namespace Mushrooms
     ""maps"": [
         {
             ""name"": ""GameControls"",
-            ""id"": ""cdd0586e-d5f1-4917-886b-334de81be12a"",
+            ""id"": ""aed9a827-f8ea-4225-9a4e-6711428b950f"",
             ""actions"": [
                 {
-                    ""name"": ""Movement"",
-                    ""type"": ""Value"",
-                    ""id"": ""f45c6d3d-0982-4011-a1e3-968d9d9b75ea"",
+                    ""name"": ""Touch"",
+                    ""type"": ""Button"",
+                    ""id"": ""fcbb7062-c7f5-42c9-b5aa-b8d6980f3eaa"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                },
+                {
+                    ""name"": ""TouchPosition"",
+                    ""type"": ""PassThrough"",
+                    ""id"": ""29e2c7f2-7004-42ab-bbef-201b4c6a5a63"",
                     ""expectedControlType"": ""Vector2"",
                     ""processors"": """",
                     ""interactions"": """"
@@ -32,69 +40,25 @@ namespace Mushrooms
             ""bindings"": [
                 {
                     ""name"": """",
-                    ""id"": ""149484dc-4c6e-4a47-b563-528777b66130"",
-                    ""path"": ""<AndroidJoystick>/stick"",
-                    ""interactions"": """",
+                    ""id"": ""2a44a4a6-0054-4c50-bd8d-3be00b5923ca"",
+                    ""path"": ""<Touchscreen>/primaryTouch/press"",
+                    ""interactions"": ""Press"",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""Movement"",
+                    ""action"": ""Touch"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
                 {
-                    ""name"": ""WASD"",
-                    ""id"": ""ce54e0de-bb42-44a4-9ad8-7128f51dc864"",
-                    ""path"": ""2DVector"",
+                    ""name"": """",
+                    ""id"": ""a4d9824a-af15-4c36-948b-efac58d6e4b4"",
+                    ""path"": ""<Touchscreen>/primaryTouch/position"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""Movement"",
-                    ""isComposite"": true,
+                    ""action"": ""TouchPosition"",
+                    ""isComposite"": false,
                     ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": ""up"",
-                    ""id"": ""c81d3ea1-2556-4c8d-91e9-fe78a4d94b05"",
-                    ""path"": ""<Keyboard>/w"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Movement"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": true
-                },
-                {
-                    ""name"": ""down"",
-                    ""id"": ""c144cda9-42a0-4560-9f7e-52de3109c0e7"",
-                    ""path"": ""<Keyboard>/s"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Movement"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": true
-                },
-                {
-                    ""name"": ""left"",
-                    ""id"": ""debcb5ee-68e5-4d01-9b7f-a8923eb1d1fa"",
-                    ""path"": ""<Keyboard>/a"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Movement"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": true
-                },
-                {
-                    ""name"": ""right"",
-                    ""id"": ""0a8b0c84-2cad-4af6-9b12-0c641966f0de"",
-                    ""path"": ""<Keyboard>/d"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Movement"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": true
                 }
             ]
         }
@@ -103,7 +67,8 @@ namespace Mushrooms
 }");
             // GameControls
             m_GameControls = asset.FindActionMap("GameControls", throwIfNotFound: true);
-            m_GameControls_Movement = m_GameControls.FindAction("Movement", throwIfNotFound: true);
+            m_GameControls_Touch = m_GameControls.FindAction("Touch", throwIfNotFound: true);
+            m_GameControls_TouchPosition = m_GameControls.FindAction("TouchPosition", throwIfNotFound: true);
         }
 
         public void Dispose()
@@ -153,12 +118,14 @@ namespace Mushrooms
         // GameControls
         private readonly InputActionMap m_GameControls;
         private IGameControlsActions m_GameControlsActionsCallbackInterface;
-        private readonly InputAction m_GameControls_Movement;
+        private readonly InputAction m_GameControls_Touch;
+        private readonly InputAction m_GameControls_TouchPosition;
         public struct GameControlsActions
         {
             private @PlayerControls m_Wrapper;
             public GameControlsActions(@PlayerControls wrapper) { m_Wrapper = wrapper; }
-            public InputAction @Movement => m_Wrapper.m_GameControls_Movement;
+            public InputAction @Touch => m_Wrapper.m_GameControls_Touch;
+            public InputAction @TouchPosition => m_Wrapper.m_GameControls_TouchPosition;
             public InputActionMap Get() { return m_Wrapper.m_GameControls; }
             public void Enable() { Get().Enable(); }
             public void Disable() { Get().Disable(); }
@@ -168,23 +135,30 @@ namespace Mushrooms
             {
                 if (m_Wrapper.m_GameControlsActionsCallbackInterface != null)
                 {
-                    @Movement.started -= m_Wrapper.m_GameControlsActionsCallbackInterface.OnMovement;
-                    @Movement.performed -= m_Wrapper.m_GameControlsActionsCallbackInterface.OnMovement;
-                    @Movement.canceled -= m_Wrapper.m_GameControlsActionsCallbackInterface.OnMovement;
+                    @Touch.started -= m_Wrapper.m_GameControlsActionsCallbackInterface.OnTouch;
+                    @Touch.performed -= m_Wrapper.m_GameControlsActionsCallbackInterface.OnTouch;
+                    @Touch.canceled -= m_Wrapper.m_GameControlsActionsCallbackInterface.OnTouch;
+                    @TouchPosition.started -= m_Wrapper.m_GameControlsActionsCallbackInterface.OnTouchPosition;
+                    @TouchPosition.performed -= m_Wrapper.m_GameControlsActionsCallbackInterface.OnTouchPosition;
+                    @TouchPosition.canceled -= m_Wrapper.m_GameControlsActionsCallbackInterface.OnTouchPosition;
                 }
                 m_Wrapper.m_GameControlsActionsCallbackInterface = instance;
                 if (instance != null)
                 {
-                    @Movement.started += instance.OnMovement;
-                    @Movement.performed += instance.OnMovement;
-                    @Movement.canceled += instance.OnMovement;
+                    @Touch.started += instance.OnTouch;
+                    @Touch.performed += instance.OnTouch;
+                    @Touch.canceled += instance.OnTouch;
+                    @TouchPosition.started += instance.OnTouchPosition;
+                    @TouchPosition.performed += instance.OnTouchPosition;
+                    @TouchPosition.canceled += instance.OnTouchPosition;
                 }
             }
         }
         public GameControlsActions @GameControls => new GameControlsActions(this);
         public interface IGameControlsActions
         {
-            void OnMovement(InputAction.CallbackContext context);
+            void OnTouch(InputAction.CallbackContext context);
+            void OnTouchPosition(InputAction.CallbackContext context);
         }
     }
 }
