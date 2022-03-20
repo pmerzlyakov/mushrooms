@@ -10,7 +10,7 @@ namespace Mushrooms
     public static class MushroomFactory
     {
 
-        public static void CreateMushroom(EcsWorld world, Transform mushroomTransform, Vector3 position)
+        public static void CreateMushroom(EcsWorld world, Transform mushroomTransform, Vector3 position, int houseID)
         {
             if (mushroomTransform == null) 
             {
@@ -23,6 +23,8 @@ namespace Mushrooms
             EcsPool<HealthComponent> health = world.GetPool<HealthComponent>(); 
             EcsPool<DamageComponent> damage = world.GetPool<DamageComponent>(); 
             EcsPool<MovementComponent> movement = world.GetPool<MovementComponent>(); 
+            EcsPool<DependenciesComponent> dependencies = world.GetPool<DependenciesComponent>(); 
+            
             EcsPool<ArmorComponent> armor = world.GetPool<ArmorComponent>(); 
 
             health.Add(mushroomEntity);
@@ -32,6 +34,9 @@ namespace Mushrooms
 
             ref RenderComponent mushroomRender = ref render.Add(mushroomEntity);
             mushroomRender.Transform = mushroomTransform;
+            
+            ref DependenciesComponent mushroomDependencies = ref dependencies.Add(mushroomEntity);
+            mushroomDependencies.House = houseID;
 
             var mushroomGO = GameObject.Instantiate(mushroomTransform, position, Quaternion.identity);
             mushroomGO.transform.GetProvider().SetEntity(mushroomEntity);

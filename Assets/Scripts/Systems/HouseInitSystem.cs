@@ -44,12 +44,16 @@ namespace Mushrooms
             EcsPool<LevelComponent> level = world.GetPool<LevelComponent>(); 
             EcsPool<CapacityComponent> capacity = world.GetPool<CapacityComponent>(); 
             EcsPool<ArmorComponent> armor = world.GetPool<ArmorComponent>(); 
+            EcsPool<DependenciesComponent> dependencies = world.GetPool<DependenciesComponent>(); 
 
             health.Add(houseEntity);
             damage.Add(houseEntity);
             capacity.Add(houseEntity);
             level.Add(houseEntity);
             armor.Add(houseEntity);
+
+            ref DependenciesComponent houseDependencies = ref dependencies.Add(houseEntity);
+            houseDependencies.Team = Teams.None;
 
             ref RenderComponent houseRender = ref render.Add(houseEntity);
             houseRender.Transform = house.transform;
