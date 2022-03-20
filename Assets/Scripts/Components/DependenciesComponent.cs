@@ -2,15 +2,11 @@ namespace Mushrooms
 {
     public struct DependenciesComponent
     {
-
-        public Teams Team;
+        //for mushrooms only
         public int House;
+
+        //for houses only
+        public HouseTypes HouseType;
+        public Teams Team;
     }
-    
-    public enum Teams
-    {
-        None = 0,
-        Red = 1,
-        Blue = 2        
-    }  
 }

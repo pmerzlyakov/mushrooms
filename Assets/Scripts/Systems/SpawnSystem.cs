@@ -15,14 +15,16 @@ namespace Mushrooms
         float currentSpawnTimeout = 2;
         
         EcsFilter houseEntities = null;
-        EcsPool<Mushrooms.RenderComponent> renderEntities = null;
+        EcsPool<RenderComponent> renderComponents = null;
+        EcsPool<DependenciesComponent> dependenciesComponents = null;
 
         public void Init(EcsSystems systems)
         {
             world = systems.GetWorld();   
 
             houseEntities = world.Filter<RenderComponent>().Inc<CapacityComponent>().End();
-            renderEntities = world.GetPool<RenderComponent>();
+            renderComponents = world.GetPool<RenderComponent>();
+            dependenciesComponents = world.GetPool<DependenciesComponent>();
 
             sceneData = systems.GetShared<SceneData>();
         }
@@ -37,12 +39,12 @@ namespace Mushrooms
 
             foreach (int house in houseEntities) 
             {
-                ref RenderComponent houseTransform = ref renderEntities.Get(house);
+                ref RenderComponent houseTransform = ref renderComponents.Get(house);
+                ref DependenciesComponent houseDependencies = ref dependenciesComponents.Get(house);
                 
-                Debug.Log($"house id {house}");
-                Debug.Log(houseTransform.Transform.position);
+                Debug.Log($"house id {house}; Team {houseDependencies.Team} Transform {houseTransform.Transform.position}");
 
-                MushroomFactory.CreateMushroom(world, sceneData.Mushroom, houseTransform.Transform.position, house);
+                // MushroomFactory.CreateMushroom(world, sceneData.Mushroom, houseTransform.Transform.position, house);
                 currentSpawnTimeout = defaultSpawnTimeout;
             }
         }
