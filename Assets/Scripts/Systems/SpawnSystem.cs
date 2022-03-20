@@ -9,8 +9,6 @@ namespace Mushrooms
 {
     public class SpawnSystem : IEcsInitSystem, IEcsRunSystem
     {
-
-        //TODO:refactor!
         EcsWorld world = null;
         SceneData sceneData = null;
         float defaultSpawnTimeout = 3;
@@ -43,37 +41,9 @@ namespace Mushrooms
             foreach(var housesTransform in housesTransforms)
             {
                 Debug.Log(housesTransform.position);
-                InitMushroom(sceneData.Mushroom, housesTransform.position);
+                MushroomFactory.CreateMushroom(world, sceneData.Mushroom, housesTransform.position);
                 currentSpawnTimeout = defaultSpawnTimeout;
             }
-        }
-
-
-        private void InitMushroom(Transform mushroomTransform, Vector3 position)
-        {
-            if (mushroomTransform == null) 
-            {
-                Debug.Log("mushroomTransform = null");
-                return;
-            }
-            int mushroomEntity = world.NewEntity();
-            
-            EcsPool<RenderComponent> render = world.GetPool<RenderComponent>(); 
-            EcsPool<HealthComponent> health = world.GetPool<HealthComponent>(); 
-            EcsPool<DamageComponent> damage = world.GetPool<DamageComponent>(); 
-            EcsPool<MovementComponent> movement = world.GetPool<MovementComponent>(); 
-            EcsPool<ArmorComponent> armor = world.GetPool<ArmorComponent>(); 
-
-            health.Add(mushroomEntity);
-            damage.Add(mushroomEntity);
-            movement.Add(mushroomEntity);
-            armor.Add(mushroomEntity);
-
-            ref RenderComponent mushroomRender = ref render.Add(mushroomEntity);
-            mushroomRender.Transform = mushroomTransform;
-
-            var mushroomGO = GameObject.Instantiate(mushroomTransform, position, Quaternion.identity);
-            mushroomGO.transform.GetProvider().SetEntity(mushroomEntity);
         }
     }
 }
