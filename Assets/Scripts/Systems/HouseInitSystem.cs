@@ -1,7 +1,4 @@
 using Leopotam.EcsLite;
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using Mushrooms.Extensions.EntityToGameObject;
 using UnityEngine;
 
@@ -30,21 +27,21 @@ namespace Mushrooms
 
         private void InitHouse(GameObject house)
         {
-            if (house == null) 
+            if (house == null)
             {
                 Debug.Log("houseTransform = null");
                 return;
             }
-            
+
             int houseEntity = world.NewEntity();
-            
-            EcsPool<RenderComponent> render = world.GetPool<RenderComponent>(); 
-            EcsPool<HealthComponent> health = world.GetPool<HealthComponent>(); 
-            EcsPool<DamageComponent> damage = world.GetPool<DamageComponent>(); 
-            EcsPool<LevelComponent> level = world.GetPool<LevelComponent>(); 
-            EcsPool<CapacityComponent> capacity = world.GetPool<CapacityComponent>(); 
-            EcsPool<ArmorComponent> armor = world.GetPool<ArmorComponent>(); 
-            EcsPool<DependenciesComponent> dependencies = world.GetPool<DependenciesComponent>(); 
+
+            EcsPool<RenderComponent> render = world.GetPool<RenderComponent>();
+            EcsPool<HealthComponent> health = world.GetPool<HealthComponent>();
+            EcsPool<DamageComponent> damage = world.GetPool<DamageComponent>();
+            EcsPool<LevelComponent> level = world.GetPool<LevelComponent>();
+            EcsPool<CapacityComponent> capacity = world.GetPool<CapacityComponent>();
+            EcsPool<ArmorComponent> armor = world.GetPool<ArmorComponent>();
+            EcsPool<DependenciesComponent> dependencies = world.GetPool<DependenciesComponent>();
 
             health.Add(houseEntity);
             damage.Add(houseEntity);
@@ -57,6 +54,10 @@ namespace Mushrooms
 
             ref RenderComponent houseRender = ref render.Add(houseEntity);
             houseRender.Transform = house.transform;
+
+            EcsPool<UnityComponent<Transform>> transforms = world.GetPool<UnityComponent<Transform>>();
+            ref var transform = ref transforms.Add(houseEntity);
+            transform.Value = house.transform;
 
             house.transform.GetProvider().SetEntity(houseEntity);
         }

@@ -1,5 +1,7 @@
+using Leopotam.EcsLite;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using Mushrooms.Extensions.EntityToGameObject;
 
 namespace Mushrooms
 {
@@ -12,6 +14,15 @@ namespace Mushrooms
         private PlayerControls _playerControls;
         private InputAction _touch;
         private InputAction _touchPosition;
+
+        private Transform _selectedObject;
+
+        private EcsWorld _world;
+
+        public void SetWorld(EcsWorld world)
+        {
+            _world = world;
+        }
 
         private void Awake()
         {
@@ -40,10 +51,15 @@ namespace Mushrooms
         {
             var touchPosition = _touchPosition.ReadValue<Vector2>();
             var ray = _mainCamera.ScreenPointToRay(touchPosition);
-            
+
             if (Physics.Raycast(ray, out RaycastHit hit, 100f, _layerMask))
             {
                 Debug.Log($"start touch {hit.transform.name}");
+                _selectedObject = hit.transform;
+            }
+            else
+            {
+                _selectedObject = null;
             }
         }
 
@@ -52,16 +68,21 @@ namespace Mushrooms
             var touchPosition = _touchPosition.ReadValue<Vector2>();
             var ray = _mainCamera.ScreenPointToRay(touchPosition);
             Debug.Log($"end touch at {touchPosition}");
-            
+
+            if ((object)_selectedObject == null) return;
+
             if (Physics.SphereCast(ray, 3f, out RaycastHit hit, 100f, _layerMask))
             {
-                var mushrooms = GameObject.FindGameObjectsWithTag("Player");
-                foreach (var mushroom in mushrooms)
-                {
-                    
-                }
-                Debug.Log($"oh, you touch my talala {hit.transform.name}");
-            } 
+                var targetObject = hit.transform;
+                int targetEntity = targetObject.GetProvider().Entity;
+
+                var movementsReqs = _world.GetPool<StartMovementRequest>();
+                int selectedEntity = _selectedObject.GetProvider().Entity;
+
+                ref var req = ref movementsReqs.Add(selectedEntity);
+                req.AllyHouseEntity = selectedEntity;
+                req.EnemyHouseEntity = targetEntity;
+            }
         }
     }
 }
