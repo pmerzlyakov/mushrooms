@@ -1,7 +1,4 @@
 using Leopotam.EcsLite;
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using Mushrooms.Extensions.EntityToGameObject;
 using UnityEngine;
 
@@ -30,12 +27,12 @@ namespace Mushrooms
 
         private void InitHouse(GameObject house)
         {
-            if (house == null) 
+            if (house == null)
             {
                 Debug.Log("houseTransform = null");
                 return;
             }
-            
+
             int houseEntity = world.NewEntity();
             
             EcsPool<RenderComponent> render = world.GetPool<RenderComponent>(); 
@@ -44,7 +41,7 @@ namespace Mushrooms
             EcsPool<CapacityComponent> capacity = world.GetPool<CapacityComponent>(); 
             EcsPool<ArmorComponent> armor = world.GetPool<ArmorComponent>(); 
             EcsPool<DependenciesComponent> dependencies = world.GetPool<DependenciesComponent>(); 
-
+            
             damage.Add(houseEntity);
             capacity.Add(houseEntity);
             level.Add(houseEntity);
@@ -58,13 +55,17 @@ namespace Mushrooms
             // var houseTypeName = houseName[1];
 
             ref DependenciesComponent houseDependencies = ref dependencies.Add(houseEntity);
-            houseDependencies.Team = houseName; //(Teams)Enum.Parse(typeof(Teams), teamName);
-            houseDependencies.HouseType = houseTypeName; //(HouseTypes)Enum.Parse(typeof(HouseTypes), houseTypeName);
+            houseDependencies.Team = houseName; 
+            houseDependencies.HouseType = houseTypeName;
             Debug.Log($"houseDependencies.Team {houseDependencies.Team}");
 
             ref RenderComponent houseRender = ref render.Add(houseEntity);
             houseRender.Transform = house.transform;
-        
+
+            EcsPool<UnityComponent<Transform>> transforms = world.GetPool<UnityComponent<Transform>>();
+            ref var transform = ref transforms.Add(houseEntity);
+            transform.Value = house.transform;
+
             house.transform.GetProvider().SetEntity(houseEntity);
         }
     }
