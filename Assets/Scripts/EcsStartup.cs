@@ -22,6 +22,7 @@ namespace Mushrooms
             _fixedUpdateSystems.Add(new HouseInitSystem());
             _fixedUpdateSystems.Add(new SpawnSystem());
             _fixedUpdateSystems.Add(new MovementSystem());
+            _fixedUpdateSystems.Add(new HouseVisualizeSystem());
            
             _fixedUpdateSystems.Init();
         }
