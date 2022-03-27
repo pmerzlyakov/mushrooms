@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <DefaultTeam>k__BackingField: 1
   <Type>k__BackingField: 1
-  <Render>k__BackingField: {fileID: 15767813810813009, guid: 9707f20aed11042a3a126513407d83fb,
+  <Prefab>k__BackingField: {fileID: 15767813810813009, guid: 147febbd6702248cc8517f17ac6af076,
     type: 3}
   <StartPriceInMushrooms>k__BackingField: 0
   <DefaultLevel>k__BackingField: 0

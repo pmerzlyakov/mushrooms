@@ -38,9 +38,8 @@ namespace Mushrooms
                 ref RenderComponent houseTransform = ref renderComponents.Get(house);
                 ref DependenciesComponent houseDependencies = ref dependenciesComponents.Get(house);
 
-                Debug.Log($"house id {house}; Team {houseDependencies.Team} Transform {houseTransform.Transform.position}");
 
-                MushroomFactory.CreateMushroom(world, sceneData.Mushroom, houseTransform.Transform.position, house);
+                // MushroomFactory.CreateMushroom(world, sceneData.Mushroom, houseTransform.Transform.position, house);
                 currentSpawnTimeout = defaultSpawnTimeout;
             }
         }

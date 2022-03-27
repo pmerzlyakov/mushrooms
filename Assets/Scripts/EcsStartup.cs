@@ -32,7 +32,10 @@ namespace Mushrooms
             _updateSystems.Init();
 
             _fixedUpdateSystems = new EcsSystems(_world, _sharedData);
+            _fixedUpdateSystems.Add(new HouseInitSystem());
+            _fixedUpdateSystems.Add(new SpawnSystem());
             _fixedUpdateSystems.Add(new MovementSystem());
+            _fixedUpdateSystems.Add(new HouseVisualizeSystem());
 #if UNITY_EDITOR
             _fixedUpdateSystems.Add(new Leopotam.EcsLite.UnityEditor.EcsWorldDebugSystem());
 #endif

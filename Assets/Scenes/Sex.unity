@@ -229,7 +229,12 @@ PrefabInstance:
     - target: {fileID: 15767813810813005, guid: 540a55c1bf0c440398ae399eb3569eda,
         type: 3}
       propertyPath: m_Name
-      value: HouseTower (1)
+      value: None Tower
+      objectReference: {fileID: 0}
+    - target: {fileID: 15767813810813005, guid: 540a55c1bf0c440398ae399eb3569eda,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 15767813810813009, guid: 540a55c1bf0c440398ae399eb3569eda,
         type: 3}
@@ -381,7 +386,12 @@ PrefabInstance:
     - target: {fileID: 15767813810813005, guid: 1ddc662480a5a4811baf13afbe1ec493,
         type: 3}
       propertyPath: m_Name
-      value: HouseForge (1)
+      value: None Forge
+      objectReference: {fileID: 0}
+    - target: {fileID: 15767813810813005, guid: 1ddc662480a5a4811baf13afbe1ec493,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 15767813810813009, guid: 1ddc662480a5a4811baf13afbe1ec493,
         type: 3}
@@ -494,7 +504,12 @@ PrefabInstance:
     - target: {fileID: 15767813810813005, guid: 540a55c1bf0c440398ae399eb3569eda,
         type: 3}
       propertyPath: m_Name
-      value: HouseTower
+      value: None Tower
+      objectReference: {fileID: 0}
+    - target: {fileID: 15767813810813005, guid: 540a55c1bf0c440398ae399eb3569eda,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 15767813810813009, guid: 540a55c1bf0c440398ae399eb3569eda,
         type: 3}
@@ -598,6 +613,50 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1307800926
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1307800928}
+  - component: {fileID: 1307800927}
+  m_Layer: 0
+  m_Name: GameObject
+  m_TagString: House
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1307800927
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1307800926}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8c6cc2761bfab48ebacaec834dfa1848, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  house: {fileID: 11400000, guid: 0f8f298b219864e38922c02f435e972d, type: 2}
+--- !u!4 &1307800928
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1307800926}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -8.144331, y: 10.338722, z: -18.504383}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 11
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1363198915
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -608,7 +667,12 @@ PrefabInstance:
     - target: {fileID: 15767813810813005, guid: 1ddc662480a5a4811baf13afbe1ec493,
         type: 3}
       propertyPath: m_Name
-      value: HouseForge
+      value: None Forge
+      objectReference: {fileID: 0}
+    - target: {fileID: 15767813810813005, guid: 1ddc662480a5a4811baf13afbe1ec493,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 15767813810813009, guid: 1ddc662480a5a4811baf13afbe1ec493,
         type: 3}
@@ -677,7 +741,12 @@ PrefabInstance:
     - target: {fileID: 15767813810813005, guid: 9707f20aed11042a3a126513407d83fb,
         type: 3}
       propertyPath: m_Name
-      value: HouseBrothel (1)
+      value: Blue Brothel
+      objectReference: {fileID: 0}
+    - target: {fileID: 15767813810813005, guid: 9707f20aed11042a3a126513407d83fb,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 15767813810813007, guid: 9707f20aed11042a3a126513407d83fb,
         type: 3}
@@ -844,7 +913,12 @@ PrefabInstance:
     - target: {fileID: 15767813810813005, guid: 9707f20aed11042a3a126513407d83fb,
         type: 3}
       propertyPath: m_Name
-      value: HouseBrothel
+      value: Red Brothel
+      objectReference: {fileID: 0}
+    - target: {fileID: 15767813810813005, guid: 9707f20aed11042a3a126513407d83fb,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 15767813810813007, guid: 9707f20aed11042a3a126513407d83fb,
         type: 3}
