@@ -40,7 +40,7 @@ namespace Mushrooms
 
                 Debug.Log($"house id {house}; Team {houseDependencies.Team} Transform {houseTransform.Transform.position}");
 
-                // MushroomFactory.CreateMushroom(world, sceneData.Mushroom, houseTransform.Transform.position, house);
+                MushroomFactory.CreateMushroom(world, sceneData.Mushroom, houseTransform.Transform.position, house);
                 currentSpawnTimeout = defaultSpawnTimeout;
             }
         }

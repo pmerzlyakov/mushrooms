@@ -22,7 +22,7 @@ namespace Mushrooms
                 _inputManager.SetWorld(_world);
             }
 
-            _updateSystems = new EcsSystems(_world);
+            _updateSystems = new EcsSystems(_world, _sharedData);
             _updateSystems.Add(new HouseInitSystem());
             _updateSystems.Add(new SpawnSystem());
             _updateSystems.Add(new StartMovementSystem());

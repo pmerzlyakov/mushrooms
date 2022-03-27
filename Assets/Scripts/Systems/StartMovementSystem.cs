@@ -31,14 +31,13 @@ namespace Mushrooms
                     if (movements.Has(mushroomEntity)) continue;
 
                     ref var move = ref movements.Add(mushroomEntity);
-                    move.Speed = 2f;
+                    move.Speed = 2f; // TODO: set from config or smth else
                     move.Target = target.Value.position;
                 }
             }
 
             foreach (int houseEntity in movementsFilter)
             {
-                Debug.Log("delete request");
                 movementReqs.Del(houseEntity);
             }
         }
