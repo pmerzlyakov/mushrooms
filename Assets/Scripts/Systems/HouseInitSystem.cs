@@ -48,20 +48,15 @@ namespace Mushrooms
             armor.Add(houseEntity);
 
             HouseDisplay houseDisplay = house.GetComponent<HouseDisplay>();
-            var houseName = houseDisplay.GetTeam();
-            var houseTypeName = houseDisplay.GetType();
-            // var houseName = house.transform.name.Split(' ');
-            // var teamName = houseName[0];
-            // var houseTypeName = houseName[1];
 
             ref DependenciesComponent houseDependencies = ref dependencies.Add(houseEntity);
-            houseDependencies.Team = houseName; 
-            houseDependencies.HouseType = houseTypeName;
-            Debug.Log($"houseDependencies.Team {houseDependencies.Team}");
-
+            houseDependencies.Team = houseDisplay.GetTeam();
+            houseDependencies.HouseType = houseDisplay.GetType();
+            
             ref RenderComponent houseRender = ref render.Add(houseEntity);
-            houseRender.Transform = house.transform;
-
+            houseRender.Renderer = houseDisplay.GetPrefab();
+            // houseRender.Transform = house.transform;
+            
             EcsPool<UnityComponent<Transform>> transforms = world.GetPool<UnityComponent<Transform>>();
             ref var transform = ref transforms.Add(houseEntity);
             transform.Value = house.transform;

@@ -10,7 +10,7 @@ public class House : ScriptableObject
     //TODO: separate
     [field: SerializeField] public Teams DefaultTeam { get; private set; }
     [field: SerializeField] public HouseTypes Type { get; private set; }
-    [field: SerializeField] public Transform Prefab { get; private set; }
+    [field: SerializeField] public Renderer Prefab { get; private set; }
 
 
     //how much NoneTeam players you need to kill to get this house

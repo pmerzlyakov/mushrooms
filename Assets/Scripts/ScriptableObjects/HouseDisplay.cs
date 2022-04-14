@@ -13,7 +13,7 @@ namespace Mushrooms
          return house.DefaultTeam;
       }
       
-      public Transform GetPrefab()
+      public Renderer GetPrefab()
       {
          return house.Prefab;
       }

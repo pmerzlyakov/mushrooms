@@ -12,7 +12,6 @@ GameObject:
   - component: {fileID: 15767813810813006}
   - component: {fileID: 15767813810813007}
   - component: {fileID: 15767813810813004}
-  - component: {fileID: 6677955607128062755}
   m_Layer: 0
   m_Name: HouseBrothel
   m_TagString: House
@@ -61,7 +60,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 7f77a9ff8070a42438c2e7de0550cc5b, type: 2}
+  - {fileID: 2100000, guid: 2cba96e7d59c84245a76c1167de1a651, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -96,16 +95,3 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &6677955607128062755
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 15767813810813005}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4beaa7d6c276e4d109f50ee1bf971556, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  HouseScrObj: {fileID: 11400000, guid: 0f8f298b219864e38922c02f435e972d, type: 2}
