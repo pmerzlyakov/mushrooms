@@ -1,10 +1,7 @@
 namespace Mushrooms
 {
-    public struct DependenciesComponent
+    public struct HouseComponent
     {
-        //for mushrooms only
-        public int House;
-
         //for houses only
         public HouseTypes HouseType;
         public Teams Team;

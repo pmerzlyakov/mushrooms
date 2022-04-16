@@ -16,6 +16,7 @@ namespace Mushrooms
             var houses = GetHousesOnScene();
             foreach (var house in houses)
             {
+                Debug.Log("houseTransform init");
                 InitHouse(house);
             }
         }
@@ -40,7 +41,7 @@ namespace Mushrooms
             EcsPool<LevelComponent> level = world.GetPool<LevelComponent>(); 
             EcsPool<CapacityComponent> capacity = world.GetPool<CapacityComponent>(); 
             EcsPool<ArmorComponent> armor = world.GetPool<ArmorComponent>(); 
-            EcsPool<DependenciesComponent> dependencies = world.GetPool<DependenciesComponent>(); 
+            EcsPool<HouseComponent> dependencies = world.GetPool<HouseComponent>(); 
             
             damage.Add(houseEntity);
             capacity.Add(houseEntity);
@@ -49,7 +50,7 @@ namespace Mushrooms
 
             HouseDisplay houseDisplay = house.GetComponent<HouseDisplay>();
 
-            ref DependenciesComponent houseDependencies = ref dependencies.Add(houseEntity);
+            ref HouseComponent houseDependencies = ref dependencies.Add(houseEntity);
             houseDependencies.Team = houseDisplay.GetTeam();
             houseDependencies.HouseType = houseDisplay.GetType();
             

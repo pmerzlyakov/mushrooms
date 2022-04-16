@@ -23,7 +23,7 @@ namespace Mushrooms
             EcsPool<HealthComponent> health = world.GetPool<HealthComponent>(); 
             EcsPool<DamageComponent> damage = world.GetPool<DamageComponent>(); 
             EcsPool<MovementComponent> movement = world.GetPool<MovementComponent>(); 
-            EcsPool<DependenciesComponent> dependencies = world.GetPool<DependenciesComponent>(); 
+            EcsPool<MushroomComponent> dependency = world.GetPool<MushroomComponent>(); 
             
             EcsPool<ArmorComponent> armor = world.GetPool<ArmorComponent>(); 
 
@@ -35,7 +35,7 @@ namespace Mushrooms
             ref RenderComponent mushroomRender = ref render.Add(mushroomEntity);
             mushroomRender.Transform = mushroomTransform;
             
-            ref DependenciesComponent mushroomDependencies = ref dependencies.Add(mushroomEntity);
+            ref MushroomComponent mushroomDependencies = ref dependency.Add(mushroomEntity);
             mushroomDependencies.House = houseID;
 
             var mushroomGO = GameObject.Instantiate(mushroomTransform, position, Quaternion.identity);

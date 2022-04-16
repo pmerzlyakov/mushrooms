@@ -10,10 +10,10 @@ namespace Mushrooms
             EcsWorld world = systems.GetWorld();
 
             EcsFilter movementsFilter = world.Filter<StartMovementRequest>().End();
-            EcsFilter mushroomsFilter = world.Filter<DependenciesComponent>().End();
+            EcsFilter mushroomsFilter = world.Filter<MushroomComponent>().End();
 
             var movementReqs = world.GetPool<StartMovementRequest>();
-            var deps = world.GetPool<DependenciesComponent>();
+            var deps = world.GetPool<MushroomComponent>();
             var movements = world.GetPool<MovementComponent>();
             var transforms = world.GetPool<UnityComponent<Transform>>();
 

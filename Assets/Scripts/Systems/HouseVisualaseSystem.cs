@@ -13,20 +13,20 @@ namespace Mushrooms
         EcsFilter houseEntities = null;
         EcsPool<RenderComponent> renderComponents = null;
         SceneData sceneData = null;
-        EcsPool<DependenciesComponent> dependencies = null; 
+        EcsPool<HouseComponent> dependencies = null; 
 
 
         public void Init(EcsSystems systems)
         {
             world = systems.GetWorld();   
-            dependencies = world.GetPool<DependenciesComponent>();
+            dependencies = world.GetPool<HouseComponent>();
             houseEntities = world.Filter<RenderComponent>().Inc<CapacityComponent>().End();
             renderComponents = world.GetPool<RenderComponent>();
 
             sceneData = systems.GetShared<SceneData>();
             foreach (int house in houseEntities) 
             {
-                // Debug.Log($"house id {house} HouseVisualizeSystem");      
+                Debug.Log($"house id {house} HouseVisualizeSystem");      
             }
         }
 
@@ -52,7 +52,7 @@ namespace Mushrooms
         //     EcsPool<DamageComponent> damage = world.GetPool<DamageComponent>(); 
         //     EcsPool<LevelComponent> level = world.GetPool<LevelComponent>(); 
         //     EcsPool<CapacityComponent> capacity = world.GetPool<CapacityComponent>(); 
-        //     EcsPool<DependenciesComponent> dependencies = world.GetPool<DependenciesComponent>(); 
+        //     EcsPool<HouseComponent> dependencies = world.GetPool<HouseComponent>(); 
 
         //     health.Add(houseEntity);
         //     damage.Add(houseEntity);
@@ -60,7 +60,7 @@ namespace Mushrooms
         //     level.Add(houseEntity);
 
 
-        //     ref DependenciesComponent houseDependencies = ref dependencies.Add(houseEntity);
+        //     ref HouseComponent houseDependencies = ref dependencies.Add(houseEntity);
         //     houseDependencies.Team = Teams.None;
 
         //     ref RenderComponent houseRender = ref render.Add(houseEntity);
