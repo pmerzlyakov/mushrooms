@@ -1,6 +1,5 @@
-using UnityEngine;
 using Leopotam.EcsLite;
-using Mushrooms.Extensions.Ecs;
+using UnityEngine;
 
 namespace Mushrooms
 {
@@ -8,18 +7,33 @@ namespace Mushrooms
     {
         private EcsWorld _world;
         private EcsSystems _updateSystems;
-        private EcsSystems _fixedUpdateSystems;
+        private EcsSystems _fixUpdateSystems;
 
-        private void Start()
+        // TODO: replace with real shared data
+        private object _sharedData = null;
+
+        private void Awake()
         {
             _world = new EcsWorld();
 
-            _updateSystems = new EcsSystems(_world);
+            _updateSystems = new EcsSystems(_world, _sharedData);
+            // NOTE: add your systems here
             _updateSystems.Add(new HouseInitSystem());
+
+#if UNITY_EDITOR
+            _updateSystems.Add(new Leopotam.EcsLite.UnityEditor.EcsWorldDebugSystem());
+#endif
             _updateSystems.Init();
 
-            // _fixedUpdateSystems = new EcsSystems(_world);
-            // _fixedUpdateSystems.Init();
+
+            _fixUpdateSystems = new EcsSystems(_world, _sharedData);
+            // NOTE: add your systems here
+            _fixUpdateSystems.Add(new MovementSystem());
+
+#if UNITY_EDITOR
+            _fixUpdateSystems.Add(new Leopotam.EcsLite.UnityEditor.EcsWorldDebugSystem());
+#endif
+            _fixUpdateSystems.Init();
         }
 
         private void Update()
@@ -27,10 +41,10 @@ namespace Mushrooms
             _updateSystems.Run();
         }
 
-        // private void FixedUpdate()
-        // {
-        //     _fixedUpdateSystems.Run();
-        // }
+        private void FixedUpdate()
+        {
+            _fixUpdateSystems.Run();
+        }
 
         private void OnDestroy()
         {
@@ -40,17 +54,22 @@ namespace Mushrooms
                 _updateSystems = null;
             }
 
-            // if (_fixedUpdateSystems != null)
-            // {
-            //     _fixedUpdateSystems.Destroy();
-            //     _fixedUpdateSystems = null;
-            // }
+            if (_fixUpdateSystems != null)
+            {
+                _fixUpdateSystems.Destroy();
+                _fixUpdateSystems = null;
+            }
 
             if (_world != null)
             {
                 _world.Destroy();
                 _world = null;
             }
+        }
+
+        public EcsWorld GetWorld()
+        {
+            return _world;
         }
     }
 }

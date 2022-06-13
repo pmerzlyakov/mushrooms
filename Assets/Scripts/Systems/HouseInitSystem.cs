@@ -7,7 +7,7 @@ namespace Mushrooms
     public class HouseInitSystem : IEcsInitSystem
     {
         EcsWorld world = null;
-        
+
         public void Init(EcsSystems systems)
         {
             world = systems.GetWorld();
@@ -35,7 +35,7 @@ namespace Mushrooms
 
             int houseEntity = world.NewEntity();
 
-            EcsPool<UnityComponent<Transform>> transforms = world.GetPool<UnityComponent<Transform>>();
+            EcsPool<UComponent<Transform>> transforms = world.GetPool<UComponent<Transform>>();
             ref var transform = ref transforms.Add(houseEntity);
             transform.Value = house.transform;
             house.transform.GetProvider().Entity = houseEntity;
