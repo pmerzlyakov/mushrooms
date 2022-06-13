@@ -69,3 +69,7 @@ crashlytics-build.properties
 # VS Code
 .vscode/
 *.code-workspace
+
+# Emacs specific
+\#*\#
+\#*\#.meta
